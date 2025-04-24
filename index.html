@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SALT Strategic Advisory</title>
+    <style>
+        /* Import fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Roboto+Mono:wght@100..700&display=swap');
+
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Base styles with main light background */
+        body {
+            font-family: 'Roboto Mono', monospace; /* Default body font */
+            line-height: 1.6;
+            color: #4b4237; /* Dark brown text */
+            background-color: #FFF6DB; /* Main light yellow background */
+        }
+
+        /* Header styles */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif; /* Header font */
+            font-weight: 600;
+            color: #4b4237; /* Default header color */
+            /* text-transform: uppercase; */
+        }
+
+        /* Link styles */
+        a {
+            text-decoration: none;
+            color: #FFAB40; /* Contrast color for links */
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: #e69533; /* Darker contrast color for hover */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header - White background */
+        header {
+            padding: 1.5rem 0;
+            background-color: #FFFFFF; /* White background */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Logo styles */
+        .logo {
+            font-family: 'Roboto Mono', monospace; /* Logo font */
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #FFE79E; /* Specific logo color */
+             /* Letter spacing handled by HTML */
+        }
+
+        /* Navigation links */
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: #4b4237; /* Dark text on white header */
+        }
+
+        .nav-links a:hover {
+            color: #FFAB40; /* Contrast color on hover */
+        }
+
+        /* Hero Section - Updated with Background Image */
+        .hero {
+            min-height: 100vh; /* Ensure section takes full viewport height */
+            padding-top: 100px; /* Account for fixed header height */
+            padding-bottom: 4rem; /* Add some padding at the bottom */
+            display: flex; /* Use flexbox to center content vertically */
+            align-items: center; /* Center content vertically */
+            justify-content: center; /* Center content horizontally */
+            text-align: center; /* Center text within hero-content */
+            position: relative; /* Needed for pseudo-element overlay */
+            overflow: hidden;
+            /* Background Image Settings */
+            background-image: url('hero.jpg'); /* Reference the uploaded image */
+            background-size: cover; /* Cover the entire section */
+            background-position: center center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            color: #FFFFFF; /* Change default text color to white for contrast */
+        }
+
+        /* Dark Overlay for Text Readability */
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Semi-transparent dark overlay */
+            background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity (0.5 = 50%) as needed */
+            z-index: 1; /* Place overlay behind content but above background image */
+        }
+
+        /* Hero text content styling - Simplified */
+        .hero-content {
+           position: relative; /* Ensure content is above the overlay */
+           z-index: 2;
+           max-width: 800px; /* Limit width of text content */
+           /* Removed flex properties as it's the only direct child now */
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: #FFFFFF; /* White text */
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            font-weight: 400; /* Slightly lighter weight for subtitle */
+            color: rgba(255, 255, 255, 0.9); /* Slightly off-white for subtitle */
+            margin-bottom: 2rem;
+            font-family: 'Roboto Mono', monospace; /* Subtitle uses body font */
+        }
+
+        /* CTA button styling adjusted for contrast */
+        .cta-button {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background-color: #FFAB40; /* Contrast color background */
+            color: #4b4237; /* Dark text */
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none; /* Remove default border */
+        }
+
+        .cta-button:hover {
+            background-color: #e69533; /* Darker shade on hover */
+            color: #4b4237;
+            transform: translateY(-2px);
+        }
+
+        /* Section Styles (excluding Hero) */
+        section:not(.hero) { /* Apply padding only to sections other than hero */
+             padding: 6rem 0;
+        }
+
+        /* Section title */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #4b4237; /* Default dark text */
+            margin-bottom: 2.5rem;
+            position: relative;
+            display: inline-block;
+            /* text-transform: uppercase; */
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: #FFAB40; /* Contrast color underline */
+        }
+
+        /* Section content paragraphs */
+        .section-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            color: #4b4237; /* Default body text */
+            max-width: 800px;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 400;
+        }
+
+        /* Strong tag emphasis */
+        .section-content strong {
+            color: #FFAB40; /* Contrast color for emphasis */
+            font-weight: 600;
+        }
+
+        /* Philosophy Section - White background */
+        .philosophy {
+            background-color: #FFFFFF;
+        }
+
+        /* Expertise Section - Main light yellow background */
+        .expertise {
+            background-color: #FFF6DB;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Service card styles */
+        .service-card {
+            background-color: #FFFFFF; /* White background for cards */
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-left: 4px solid #FFCC8B; /* Rare orangey border */
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.08);
+        }
+
+        .service-card h3 {
+            color: #4b4237;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            position: relative;
+             /* text-transform: uppercase; */
+        }
+
+         /* Remove underline from card headers */
+        .service-card h3::after {
+           display: none;
+        }
+
+        .service-card p {
+            color: #6d5c4d; /* Lighter text for card body */
+            font-size: 0.95rem;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        /* Insights Section - Main light yellow background */
+        .insights {
+            background-color: #FFF6DB;
+        }
+
+        /* Insights placeholder - White background */
+        .insights-placeholder {
+            padding: 3rem;
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            text-align: center;
+            color: #6d5c4d;
+            border: 1px dashed #FFAB40; /* Contrast color border */
+        }
+
+        /* Contact Section - Dark brown background */
+        .contact {
+            background-color: #4b4237;
+            color: #f1e8de; /* Light text */
+        }
+
+        .contact .section-title {
+            color: #f1e8de; /* Light title */
+            /* text-transform: uppercase; */
+        }
+
+        .contact .section-title::after {
+            background-color: #FFAB40; /* Contrast underline */
+        }
+
+         .contact .section-content p {
+            color: #f1e8de; /* Light text */
+            font-family: 'Roboto Mono', monospace;
+         }
+
+        .contact-info {
+            margin-top: 2rem;
+        }
+
+        .contact-info p {
+            color: #f1e8de; /* Light text */
+            margin-bottom: 1rem;
+        }
+
+        /* Contact link styles */
+        .contact-info a {
+            color: #FFE79E; /* Logo color */
+            font-weight: 500;
+        }
+
+        .contact-info a:hover {
+            color: #FFAB40; /* Contrast color on hover */
+        }
+
+        /* Footer - Darker brown background */
+        footer {
+            background-color: #382f29;
+            color: #f1e8de; /* Light text */
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .hero {
+                 padding-top: 120px; /* Increase padding top slightly */
+                 min-height: 80vh; /* Adjust height slightly for mobile if needed */
+
+            }
+
+            /* Removed hero-container specific rules as it's no longer used for layout */
+            /* Removed hero-image specific rules */
+
+            .hero-content {
+                max-width: 90%; /* Allow content to use more width */
+                padding: 0 1rem; /* Add horizontal padding */
+            }
+
+
+            .hero h1 {
+                font-size: 2.2rem; /* Adjust font size */
+            }
+
+            .hero h2 {
+                font-size: 1.1rem; /* Adjust font size */
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            /* Hide nav links for mobile (requires JS for toggle) */
+            .nav-links {
+                display: none;
+            }
+            /* Add burger menu icon/button here if needed */
+
+             .container {
+                padding: 0 1rem; /* Reduce padding */
+            }
+
+            section:not(.hero) { /* Apply padding only to sections other than hero */
+                 padding: 4rem 0; /* Reduce section padding */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">S A L T</div>
+            <nav class="nav-links">
+                <a href="#philosophy">Our Edge</a>
+                <a href="#expertise">Expertise</a>
+                <a href="#insights">Perspectives</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>The Terrain Defines the Strategy.</h1>
+            <h2>SALT: Strategic Advisory. Local Terrain.</h2>
+            <a href="#philosophy" class="cta-button">Our Approach →</a>
+        </div>
+        </section>
+
+    <section id="philosophy" class="philosophy">
+        <div class="container">
+            <h2 class="section-title">Our Edge</h2>
+            <div class="section-content">
+                <p>Conventional analysis often fails where complexity reigns. Standard models overlook the granular realities that determine success or failure in the world's most dynamic and challenging markets.</p>
+                <p><strong>SALT</strong> was formed to bridge this critical gap. We fuse rigorous, independent analysis with deep, embedded local intelligence – the essential 'terrain' often invisible to outside perspectives.</p>
+                <p>Our approach challenges assumptions and identifies non-obvious pathways. We operate with agility and discretion, providing the strategic foresight and navigational support necessary to unlock potential and execute with confidence in demanding environments.</p>
+                <p>We believe superior insight originates from integrating global strategic frameworks with irreducible local context.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="expertise" class="expertise">
+        <div class="container">
+            <h2 class="section-title">Expertise</h2>
+            <div class="section-content">
+                <p>We partner with sophisticated organizations navigating high-stakes decisions in markets undergoing profound change.</p>
+                <p>Our focus lies at the intersection of strategic analysis, geopolitical insight, and on-the-ground intelligence.</p>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Strategic Clarity</h3>
+                        <p>Illuminating complex situations to enable decisive action.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Risk Navigation</h3>
+                        <p>Identifying, assessing, and mitigating non-traditional risks.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Opportunity Identification</h3>
+                        <p>Uncovering high-conviction pathways often missed by conventional screening.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Execution Support</h3>
+                        <p>Leveraging deep networks and local understanding to facilitate outcomes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="insights" class="insights">
+        <div class="container">
+            <h2 class="section-title">Perspectives</h2>
+            <div class="section-content">
+                <div class="insights-placeholder">
+                    <p>Proprietary insights and analysis forthcoming.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="section-content">
+                <p>For inquiries, please contact us via secure channels.</p>
+                <div class="contact-info">
+                    <p><a href="mailto:secure@saltstrat.com">secure@saltstrat.com</a></p>
+                    <p>Regional HQs: Damascus | NYC</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 SALT Strategic Advisory. All rights reserved.</p>
+        </div>
+    </footer>
+
+    </body>
+</html>
